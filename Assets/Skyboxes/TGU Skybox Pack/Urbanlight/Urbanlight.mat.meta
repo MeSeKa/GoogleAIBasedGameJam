@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: bda78b9face15004da6578098f28d80d
+timeCreated: 1519590958
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 96433
+  packageName: TGU Skybox Pack
+  packageVersion: 1.0
+  assetPath: Assets/TGU Skybox Pack/Urbanlight/Urbanlight.mat
+  uploadId: 232320
