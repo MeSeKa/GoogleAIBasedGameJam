@@ -1,22 +1,24 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private TimeState currentState= TimeState.New;
+    private TimeState currentState = TimeState.New;
 
     [SerializeField] FloorChanger floorChanger;
+    [SerializeField] Crane crane;
 
-    private float playerDisablingTime = .5f;
+    private float playerDisablingTime = 1f;
     private float environmentChangingTime = 1f;
-    private float playerEnablingTime = .5f;
+    private float playerEnablingTime = 1f;
 
     [SerializeField] GameObject player;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             FullTimeChange();
         }
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
         DisablePlayer();
         Invoke("ChangeEnvironment", playerDisablingTime);
         Invoke("EnablePlayer", playerDisablingTime + environmentChangingTime);
+        Invoke("Finish", playerDisablingTime + environmentChangingTime + playerEnablingTime);
 
     }
 
@@ -48,16 +51,28 @@ public class GameManager : MonoBehaviour
 
     void DisablePlayer()
     {
-        player.SetActive(false);
+        crane.Show();
+        crane.TakePlayer();
+        player.GetComponent<ThirdPersonController>().enabled = false;
+        player.GetComponent<CharacterController>().enabled = true;
     }
 
     void ChangeEnvironment()
     {
+        //crane.DeShow();
         floorChanger.ChangeNewState(currentState);
     }
 
     void EnablePlayer()
     {
-        player.SetActive(true);
+        //crane.Show();
+        crane.ReleasePlayer();
+    }
+
+    void Finish()
+    {
+        crane.DeShow();
+        player.GetComponent<ThirdPersonController>().enabled = true;
+        player.GetComponent<CharacterController>().enabled = true;
     }
 }
