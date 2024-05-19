@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     private TimeState currentState = TimeState.New;
 
     [SerializeField] FloorChanger floorChanger;
@@ -15,6 +17,13 @@ public class GameManager : MonoBehaviour
     private float playerEnablingTime = 1f;
 
     [SerializeField] GameObject player;
+
+    private void Awake()
+    {
+        Instance = this;
+
+        Application.targetFrameRate = 60;
+    }
 
     void Update()
     {
@@ -74,5 +83,11 @@ public class GameManager : MonoBehaviour
         crane.DeShow();
         player.GetComponent<ThirdPersonController>().enabled = true;
         player.GetComponent<CharacterController>().enabled = true;
+    }
+
+
+    public void AddToMainFloor(GameObject obj)
+    {
+        obj.transform.parent = floorChanger.transform;
     }
 }

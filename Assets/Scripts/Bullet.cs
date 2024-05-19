@@ -7,9 +7,6 @@ public class Bullet : MonoBehaviour
     Vector3 targetDir = Vector3.zero;
     float bulletSpeed = 10f;
 
-    [SerializeField] AudioSource blastingSource;
-    [SerializeField] AudioSource nothingSource;
-
     public void Fire(Vector3 targetPos)
     {
         targetDir = targetPos.normalized;
@@ -25,9 +22,28 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("TimeEfficent"))
-            blastingSource.Play();
-        else nothingSource.Play();
-        print(other.name);
+        switch (other.gameObject.tag)
+        {
+            case "Player":
+                break;
+            case "TimeEfficent":
+                SoundManager.Instance.BlastSound();
+                ParticleManager.Instance.BlastParticle(transform);
+                gameObject.SetActive(false);
+                break;
+            case "Enemy":
+                print("enemyHit");
+                EnemyManager.Instance.SpawnGraveyard(other.transform);
+                ParticleManager.Instance.BlastParticle(other.transform);
+                SoundManager.Instance.BlastSound();
+                other.gameObject.SetActive(false);
+                gameObject.SetActive(false);
+                break;
+            default:
+                SoundManager.Instance.NothingSound();
+                gameObject.SetActive(false);
+                break;
+        }
+
     }
 }
