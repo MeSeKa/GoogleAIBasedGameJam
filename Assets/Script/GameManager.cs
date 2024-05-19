@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         crane.TakePlayer();
         player.GetComponent<ThirdPersonController>().enabled = false;
         player.GetComponent<CharacterController>().enabled = true;
+
     }
 
     void ChangeEnvironment()
