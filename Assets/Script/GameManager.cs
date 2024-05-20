@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] bool enemiesOnFirstMAp = true;
     public static GameManager Instance { get; private set; }
 
     private TimeState currentState = TimeState.New;
@@ -78,14 +79,15 @@ public class GameManager : MonoBehaviour
         player.GetComponent<ThirdPersonController>().enabled = false;
         player.GetComponent<CharacterController>().enabled = true;
 
-        EnemyManager.Instance.ShowEnemies(false);
+        EnemyManager.Instance.ShowEnemies(!enemiesOnFirstMAp);
     }
 
     void ChangeEnvironment()
     {
+        PlayerSingleton.Instance.GetComponent<CharacterController>().enabled = false;
         //crane.DeShow();
         if (currentState == TimeState.New)
-            EnemyManager.Instance.ShowEnemies(true);
+            EnemyManager.Instance.ShowEnemies(enemiesOnFirstMAp);
         floorChanger.ChangeNewState(currentState);
     }
 
@@ -97,6 +99,7 @@ public class GameManager : MonoBehaviour
 
     void Finish()
     {
+        PlayerSingleton.Instance.GetComponent<CharacterController>().enabled = true;
         crane.DeShow();
         player.GetComponent<ThirdPersonController>().enabled = true;
         player.GetComponent<CharacterController>().enabled = true;

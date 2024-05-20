@@ -19,6 +19,10 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void Start()
     {
+        ReStart();
+    }
+    public void ReStart()
+    {
         end.SetActive(false);
         start.SetActive(true);
         Invoke("DeactiveStart", transitionTime);
@@ -49,5 +53,12 @@ public class SceneTransitionManager : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
+
+    public void TimeRewind()
+    {
+        end.SetActive(true);
+        start.SetActive(false);
+        Invoke("ReStart", transitionTime);
     }
 }

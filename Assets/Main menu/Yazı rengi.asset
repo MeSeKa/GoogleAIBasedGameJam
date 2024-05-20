@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "Yaz\u0131 rengi"
   m_EditorClassIdentifier: 
   colorMode: 3
-  topLeft: {r: 0, g: 0.17759418, b: 1, a: 1}
-  topRight: {r: 0.020797385, g: 0.04361789, b: 0.4792453, a: 1}
-  bottomLeft: {r: 0, g: 0.13665816, b: 0.79622644, a: 1}
-  bottomRight: {r: 0, g: 0.08281161, b: 0.7584905, a: 1}
+  topLeft: {r: 0, g: 0, b: 0, a: 1}
+  topRight: {r: 0.19999999, g: 0.06119454, b: 0.058490533, a: 1}
+  bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+  bottomRight: {r: 0.3433962, g: 0.3433962, b: 0.3433962, a: 1}

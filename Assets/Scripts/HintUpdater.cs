@@ -67,12 +67,15 @@ public class HintUpdater : MonoBehaviour
                     PlayerSingleton.Instance.GetComponent<CharacterController>().enabled = false;
                     PlayerSingleton.Instance.transform.position = returnPos.position;
                     PlayerSingleton.Instance.GetComponent<CharacterController>().enabled = true;
+
+                    SceneTransitionManager.Instance.ReStart();
                     break;
                 case 13:
                     hint = "Bu su çok derin! Karşıya geçmem lazım. Bir dakika!! Artık zaman içerisinde dolanabiliyorum. Burada da bu yeteneğimi kullanmayı mı denesem? (Press T)";
                     PlayerSingleton.Instance.GetComponent<CharacterController>().enabled = false;
                     PlayerSingleton.Instance.transform.position = returnPos.position;
                     PlayerSingleton.Instance.GetComponent<CharacterController>().enabled = true;
+                    SceneTransitionManager.Instance.ReStart();
                     break;
                 case 14:
                     hint = "Evvet, İşe yaradı!! Aynı yerdeyim ama farklı bir zamandayım. Ve ırmak kurumuş! Artık geçebilirim....";
@@ -82,6 +85,7 @@ public class HintUpdater : MonoBehaviour
                     PlayerSingleton.Instance.GetComponent<CharacterController>().enabled = false;
                     PlayerSingleton.Instance.transform.position = returnPos.position;
                     PlayerSingleton.Instance.GetComponent<CharacterController>().enabled = true;
+                    SceneTransitionManager.Instance.ReStart();
                     break;
                 case 155:
                     hint = "Aşağı inebildim nihayet şimdi şu kayığa doğru yönelsem iyi olacak";

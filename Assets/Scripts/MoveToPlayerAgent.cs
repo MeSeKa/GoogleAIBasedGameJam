@@ -32,6 +32,12 @@ public class MoveToPlayerAgent : Agent
 
     }
 
+    private void Update()
+    {
+        
+        AddReward(-1 * Time.deltaTime * (transform.position - targetPosition.position).magnitude);
+    }
+
     public override void CollectObservations(VectorSensor sensor)
     {
         if (transform)
@@ -66,13 +72,30 @@ public class MoveToPlayerAgent : Agent
         continousActions[1] = Input.GetAxisRaw("Vertical");
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            AddReward(100f);
+            environment.sharedMaterial = winMaterial;
+            SceneTransitionManager.Instance.EndScene();
+            //EndEpisode();
+        }
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            SetReward(-1);
+            environment.sharedMaterial = loseMaterial;
+            //EndEpisode();//
+        }
+    }
+
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SetReward(1);
+            AddReward(30f * Time.deltaTime);
             environment.sharedMaterial = winMaterial;
-            SceneTransitionManager.Instance.EndScene();
+            //SceneTransitionManager.Instance.EndScene();
             //EndEpisode();
         }
         if (collision.gameObject.CompareTag("Wall"))
