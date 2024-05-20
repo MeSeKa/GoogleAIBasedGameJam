@@ -21,8 +21,8 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        desiredPosition = startPosition;
-        desiredSize = startDistance;
+        desiredPosition = playerPosition;
+        desiredSize = playerDistance;
         if(_camera == null)
         {
             _camera = Camera.main;
@@ -44,9 +44,9 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (desiredPosition != null && (desiredPosition.position - transform.position).magnitude >= .15)
+        if (desiredPosition != null && (desiredPosition.position - transform.position).magnitude >= .5)
         {
-            transform.position += (desiredPosition.position - transform.position).normalized * moveSpeed * Time.deltaTime;
+            transform.position += (desiredPosition.position - transform.position) * moveSpeed * Time.deltaTime;
         }
 
         if(_camera.orthographicSize != desiredSize)

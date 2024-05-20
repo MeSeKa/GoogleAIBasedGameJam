@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (HintManager.Instance.CanTimeTravel && Input.GetKeyDown(KeyCode.T))
         {
             FullTimeChange();
         }

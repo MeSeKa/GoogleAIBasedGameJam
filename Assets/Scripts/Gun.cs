@@ -39,7 +39,7 @@ public class Gun : MonoBehaviour
         {
             remainingCooldown -= Time.deltaTime;
         }
-        else if (Input.GetMouseButtonDown(0))
+        else if (HintManager.Instance.CanAttack && Input.GetMouseButtonDown(0))
         {
             Shoot();
             remainingCooldown = cooldown;
