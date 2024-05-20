@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] int enemyCount=10;
 
     private Queue<GameObject> graveyardQueue = new Queue<GameObject>();
-
+    [SerializeField] GameObject[] enemies;
     private void Awake()
     {
         Instance = this;
@@ -22,6 +22,7 @@ public class EnemyManager : MonoBehaviour
             graveyardQueue.Enqueue(obj);
 
         }
+
     }
 
     public void SpawnGraveyard(Transform enemy)
@@ -31,4 +32,11 @@ public class EnemyManager : MonoBehaviour
         obj.transform.rotation = enemy.rotation;
         obj.SetActive(true);
     }
+
+    public void ShowEnemies(bool set)
+    {
+        foreach (var obj in enemies)
+            obj.SetActive(set);
+    }
+
 }

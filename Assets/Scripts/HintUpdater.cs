@@ -37,6 +37,7 @@ public class HintUpdater : MonoBehaviour
                     hint = "Zaman yolculuğu çok tehlikeli bir iş. (\"T\" tuşu)\r\nFarklı bir zaman dilimine geçsem bile duvarların içine sıkışmadığımdan emin olsam iyi olacak\r\nNeyseki zamanı başa alabiliyorum (\"R\" tuşu)";
                     HintManager.Instance.AddNewControlls("Zaman Yolculuğu: T");
                     HintManager.Instance.SetCanTimeTravel(true);
+                    GameManager.Instance.ShowCooldown();
                     break;
                 case 4:
                     hint = "Aaa! Farklı bir yere ulaştım. Bu inanılmaz!! Peki burada ne yapmalıyım? Yukarıda bir silah var. Evet!! Bu sayede kapının önündeki zombilerden kurtulabilirim!!";
@@ -48,6 +49,7 @@ public class HintUpdater : MonoBehaviour
                     hint = "Şimdi korkun benden zombi sürüsü bu zaman silahıyla sizi dirilmeden önceki zamanınıza geri yollayacağım!! Hem kapının önünü temizleyip ilerleyebilirim";
                     HintManager.Instance.AddNewControlls("Ateş Etme: MOUSE CLICK");
                     HintManager.Instance.SetCanAttack(true);
+                    Gun.Instance.ShowCooldown();
                     break;
                 case 7:
                     SceneTransitionManager.Instance.NextLevel();
@@ -90,6 +92,7 @@ public class HintUpdater : MonoBehaviour
                     break;
                 case 17:
                     hint = "Nihayet Sonunda Başardım!! Artık evime dönebilirim!!";
+                    SceneTransitionManager.Instance.NextLevel();
                     break;
             }
 

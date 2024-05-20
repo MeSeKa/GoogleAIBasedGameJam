@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MapConvertLevel 3.unity
     guid: de598694be27a58449ee232fb19f7180
+  - enabled: 1
+    path: Assets/Scenes/Final.unity
+    guid: dd10762bd5b4c4e43a6a8872bdffd227
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

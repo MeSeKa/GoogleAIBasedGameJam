@@ -23,6 +23,14 @@ public class HintManager : MonoBehaviour
         Instance = this;
         CanAttack = canAttack;
         CanTimeTravel = canTimeTravel;
+        if(canTimeTravel)
+        {
+            GameManager.Instance.ShowCooldown();
+        }
+        if (canAttack)
+        {
+            Gun.Instance.ShowCooldown();
+        }
     }
 
     public void SetNewHint(string hint)

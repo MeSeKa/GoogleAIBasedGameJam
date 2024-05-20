@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
 {
+    public static Gun Instance { get; private set; }
+
     [SerializeField]
     float cooldown = 1f;
     float remainingCooldown = 1f;
@@ -18,8 +21,11 @@ public class Gun : MonoBehaviour
 
     AudioSource shootingSource;
 
+    [SerializeField] Image cooldownShower;
+
     private void Awake()
     {
+        Instance = this;
         gunFiringPoint = this.transform;
 
         for (int i = 0; i < bulletCount; i++)
@@ -38,6 +44,7 @@ public class Gun : MonoBehaviour
         if (remainingCooldown > 0)
         {
             remainingCooldown -= Time.deltaTime;
+            cooldownShower.fillAmount = (cooldown - remainingCooldown) / cooldown;
         }
         else if (HintManager.Instance.CanAttack && Input.GetMouseButtonDown(0))
         {
@@ -63,5 +70,10 @@ public class Gun : MonoBehaviour
 
             shootingSource.Play();
         }
+    }
+
+    public void ShowCooldown()
+    {
+        cooldownShower.gameObject.SetActive(true);
     }
 }

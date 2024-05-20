@@ -2,6 +2,7 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject player;
 
+    [SerializeField]
+    float cooldown = 3f;
+    float remainingCooldown = 3f;
+
+    [SerializeField] Image cooldownShower;
     private void Awake()
     {
         Instance = this;
@@ -27,9 +33,16 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (HintManager.Instance.CanTimeTravel && Input.GetKeyDown(KeyCode.T))
+
+        if (remainingCooldown >= 0)
+        {
+            remainingCooldown -= Time.deltaTime;
+            cooldownShower.fillAmount = (cooldown - remainingCooldown) / cooldown;
+        }
+        else if (HintManager.Instance.CanTimeTravel && Input.GetKeyDown(KeyCode.T))
         {
             FullTimeChange();
+            remainingCooldown = cooldown;
         }
     }
 
@@ -65,11 +78,14 @@ public class GameManager : MonoBehaviour
         player.GetComponent<ThirdPersonController>().enabled = false;
         player.GetComponent<CharacterController>().enabled = true;
 
+        EnemyManager.Instance.ShowEnemies(false);
     }
 
     void ChangeEnvironment()
     {
         //crane.DeShow();
+        if (currentState == TimeState.New)
+            EnemyManager.Instance.ShowEnemies(true);
         floorChanger.ChangeNewState(currentState);
     }
 
@@ -90,5 +106,10 @@ public class GameManager : MonoBehaviour
     public void AddToMainFloor(GameObject obj)
     {
         obj.transform.parent = floorChanger.transform;
+    }
+
+    public void ShowCooldown()
+    {
+        cooldownShower.gameObject.SetActive(true);
     }
 }
